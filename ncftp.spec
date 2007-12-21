@@ -24,6 +24,7 @@ Patch7:		ncftp-3.1.1-EPLF.diff.bz2
 # adapted to 3.1.1 from http://www.fefe.de/ncftp/ncftp-3.0-EPLF.diff
 # It will allow ncftp to work with publicfile. http://publicfile.org/
 
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 Ncftp is an improved FTP client.  Ncftp's improvements include support
