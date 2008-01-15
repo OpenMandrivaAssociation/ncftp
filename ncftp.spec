@@ -1,6 +1,6 @@
 %define name 		ncftp
 %define version		3.2.0
-%define release		%mkrel 1
+%define release		%mkrel 3
 %define _localstatedir	/var
 
 Summary:	An improved FTP client
