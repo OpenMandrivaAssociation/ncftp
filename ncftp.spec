@@ -1,29 +1,25 @@
-%define name 		ncftp
-%define version		3.2.0
-%define release		%mkrel 4
-%define _localstatedir	/var
+%define _localstatedir /var
 
 Summary:	An improved FTP client
-Name:		%{name}
-Version:	%{version}
-Release:	%{release}
+Name:		ncftp
+Version:	3.2.2
+Release:	%mkrel 1
 Group: 		Networking/File transfer
 URL:		http://www.ncftp.com/
 BuildRequires:	ncurses-devel
 License:	Artistic
-Source0:	ftp://ftp.ncftp.com/ncftp/ncftp-%{version}-src.tar.bz2
-Patch0:		ncftp-confirm.patch.bz2 
-Patch1:		ncftp-3.1.6-DESTDIR.patch.bz2
-Patch3: 	ncftp-3.0.3-resume.patch.bz2
-Patch5:		ncftp-3.1.9-suspend.patch.bz2
+Source0:	ftp://ftp.ncftp.com/ncftp/ncftp-%{version}-src.tar.gz
+Patch0:		ncftp-confirm.patch
+Patch1:		ncftp-3.1.6-DESTDIR.patch
+Patch3: 	ncftp-3.0.3-resume.patch
+Patch5:		ncftp-3.1.9-suspend.patch
 # P6 from ftp://ftp.kame.net/pub/kame/misc
-Patch6:		ncftp-320-v6-20061109b.diff.gz
-Patch7:		ncftp-3.1.1-EPLF.diff.bz2
+Patch6:		ncftp-322-v6-20080811.diff
+Patch7:		ncftp-3.1.1-EPLF.diff
 # yves 3.1.1-1mdk
 # requested by Yura Gusev <elendal@w4technology.com>
 # adapted to 3.1.1 from http://www.fefe.de/ncftp/ncftp-3.0-EPLF.diff
 # It will allow ncftp to work with publicfile. http://publicfile.org/
-
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
@@ -42,13 +38,17 @@ anonymous logins and more.
 %patch7 -p1 -b .eplf
 
 %build
-%configure --enable-signals --enable-ipv6
+%configure \
+    --enable-signals \
+    --enable-ipv6
 %make
 
 %install
 rm -rf %{buildroot}
+
 mkdir -p %{buildroot}{%{_bindir},%{_mandir}/man1}
-%makeinstall BINDIR=$RPM_BUILD_ROOT%{_bindir} 
+
+%makeinstall BINDIR=%{buildroot}%{_bindir} 
 
 # yves - 3.1.1-1mdk - fix doc perm
 find doc -type f -exec chmod 0644 {} \;
@@ -56,7 +56,7 @@ find doc -type f -exec chmod 0644 {} \;
 rm -f doc/*windows.txt
 
 %clean
-rm -fr %{buildroot};
+rm -fr %{buildroot}
 
 %files
 %defattr(-,root,root)
