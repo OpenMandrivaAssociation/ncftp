@@ -3,7 +3,7 @@
 Summary:	An improved FTP client
 Name:		ncftp
 Version:	3.2.2
-Release:	%mkrel 1
+Release:	%mkrel 2
 Group: 		Networking/File transfer
 URL:		http://www.ncftp.com/
 BuildRequires:	ncurses-devel
@@ -31,11 +31,11 @@ anonymous logins and more.
 
 %setup -q
 %patch0 -p0 -b .confirm 
-%patch1 -p1
-%patch3 -p1 -b .res
+%patch1 -p1 -b .DESTDIR
+%patch3 -p0 -b .resume
 %patch5 -p1 -b .suspend
 %patch6 -p1 -b .ipv6
-%patch7 -p1 -b .eplf
+%patch7 -p0 -b .eplf
 
 %build
 %configure \
