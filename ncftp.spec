@@ -3,7 +3,7 @@
 Summary:	An improved FTP client
 Name:		ncftp
 Version:	3.2.2
-Release:	%mkrel 2
+Release:	%mkrel 3
 Group: 		Networking/File transfer
 URL:		http://www.ncftp.com/
 BuildRequires:	ncurses-devel
@@ -16,6 +16,7 @@ Patch5:		ncftp-3.1.9-suspend.patch
 # P6 from ftp://ftp.kame.net/pub/kame/misc
 Patch6:		ncftp-322-v6-20080811.diff
 Patch7:		ncftp-3.1.1-EPLF.diff
+Patch8:		ncfpt-3.2.2-fix-help-cmd.patch
 # yves 3.1.1-1mdk
 # requested by Yura Gusev <elendal@w4technology.com>
 # adapted to 3.1.1 from http://www.fefe.de/ncftp/ncftp-3.0-EPLF.diff
@@ -36,6 +37,7 @@ anonymous logins and more.
 %patch5 -p1 -b .suspend
 %patch6 -p1 -b .ipv6
 %patch7 -p0 -b .eplf
+%patch8 -p1 -b .help
 
 %build
 %configure \
