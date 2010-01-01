@@ -2,21 +2,20 @@
 
 Summary:	An improved FTP client
 Name:		ncftp
-Version:	3.2.2
-Release:	%mkrel 4
+Version:	3.2.3
+Release:	%mkrel 1
 Group: 		Networking/File transfer
 URL:		http://www.ncftp.com/
 BuildRequires:	ncurses-devel
 License:	Artistic
-Source0:	ftp://ftp.ncftp.com/ncftp/ncftp-%{version}-src.tar.gz
+Source0:	ftp://ftp.ncftp.com/ncftp/ncftp-%{version}-src.tar.bz2
 Patch0:		ncftp-confirm.patch
-Patch1:		ncftp-3.1.6-DESTDIR.patch
 Patch3: 	ncftp-3.0.3-resume.patch
 Patch5:		ncftp-3.1.9-suspend.patch
 # P6 from ftp://ftp.kame.net/pub/kame/misc
-Patch6:		ncftp-322-v6-20080811.diff
+Patch6:		ncftp-323-v6-20091109.diff
 Patch7:		ncftp-3.1.1-EPLF.diff
-Patch8:		ncfpt-3.2.2-fix-help-cmd.patch
+Patch8:		ncftp-3.2.3-fix-help-cmd.patch
 # yves 3.1.1-1mdk
 # requested by Yura Gusev <elendal@w4technology.com>
 # adapted to 3.1.1 from http://www.fefe.de/ncftp/ncftp-3.0-EPLF.diff
@@ -32,7 +31,6 @@ anonymous logins and more.
 
 %setup -q
 %patch0 -p0 -b .confirm 
-%patch1 -p1 -b .DESTDIR
 %patch3 -p0 -b .resume
 %patch5 -p1 -b .suspend
 %patch6 -p1 -b .ipv6
@@ -50,7 +48,7 @@ rm -rf %{buildroot}
 
 mkdir -p %{buildroot}{%{_bindir},%{_mandir}/man1}
 
-%makeinstall BINDIR=%{buildroot}%{_bindir} 
+%makeinstall_std
 
 # yves - 3.1.1-1mdk - fix doc perm
 find doc -type f -exec chmod 0644 {} \;
