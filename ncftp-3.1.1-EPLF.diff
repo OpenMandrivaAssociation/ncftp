@@ -1,0 +1,66 @@
+--- libncftp/io_listmem.c	2006-03-13 19:41:50.000000000 +0100
++++ libncftp/io_listmem.c.oden	2008-12-22 11:55:31.000000000 +0100
+@@ -31,6 +31,52 @@
+ #	endif
+ #endif
+ 
++
++
++
++void parseEPLF(char *line) {
++  char newline[512];
++  char *name=0;
++  time_t mtime=0,now=time(0);
++  char type=0;	/* 0=file, 1=dir */
++  unsigned long size=0;
++  char *ptr=line;
++  struct tm *t;
++  char date[20];
++  char *months[12]={"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
++  while (*ptr)
++    switch (*ptr) {
++    case '\t':
++      {
++	char *tmp=strchr(ptr,'\n');
++	if (tmp) *tmp=0;
++      }
++      t=localtime(&mtime);
++      if ((mtime<=now) && (mtime>=now-(60*60*24*7*26))) {
++	sprintf(date,"%s %-2d %02d:%02d",months[t->tm_mon],t->tm_mday,t->tm_hour,t->tm_min);
++      } else {
++	sprintf(date,"%s %-2d %5d",months[t->tm_mon],t->tm_mday,t->tm_year+1900);
++      }
++      snprintf(newline,511,"%s  1 mirror   mirror  %8d %s %s",
++		type?"drwxr-xr-x":"-rw-r--r--",size,date,ptr+1);
++      newline[511]=0;
++      strcpy(line,newline);
++      return;
++    case 's':
++      while (*++ptr && (*ptr != ','))
++	size = size * 10 + (*ptr - '0');
++      break;
++    case 'm':
++      while (*++ptr && (*ptr != ','))
++	mtime = mtime * 10 + (*ptr - '0');
++      break;
++    case '/':
++      type=1;
++    default:
++      while (*ptr) if (*ptr++ == ',') break;
++    }
++}
++
+ int
+ FTPListToMemory2(const FTPCIPtr cip, const char *const pattern, const FTPLineListPtr llines, const char *const lsflags, const int blankLines, int *const tryMLSD)
+ {
+@@ -161,6 +207,10 @@ FTPListToMemory2(const FTPCIPtr cip, con
+ 			if ((line[0] == '.') && ((islsenddelim(line[1])) || ((line[1] == '.') && (islsenddelim(line[2])))))
+ 				continue;	/* Skip . and .. */
+ 
++			if (line[0] == '+') {   /* EPLF */
++				parseEPLF(line);
++			}
++
+ 			(void) AddLine(llines, line);
+ 		}
+ 

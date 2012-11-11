@@ -1,0 +1,27 @@
+Make help command work
+
+If you type 'help' on ncftp's shell you will get the following
+message:
+
+"""
+ncftp: cmds.c:1382: HelpCmd: Assertion `gNumCommands < (sizeof(cmdnames) / sizeof(char *))' failed.
+Aborted (core dumped)
+"""
+
+The assertion on that line seems a leftover because gNumCommands is always
+65, it doesn't depend on the amount of arguments in the command-line.
+
+By removing the assertion the help command works as expected. :)
+
+-- Luiz Capitulino
+Index: ncftp-3.2.3/ncftp/cmds.c
+--- ncftp-3.2.3/ncftp/cmds.c.help	2010-01-01 20:10:52.000000000 +0100
++++ ncftp-3.2.3/ncftp/cmds.c	2010-01-01 20:10:52.000000000 +0100
+@@ -1379,7 +1379,6 @@
+ 	const char *cmdnames[80];
+ 
+ 	ARGSUSED(gUnusedArg);
+-	assert(gNumCommands < (sizeof(cmdnames) / sizeof(char *)));
+ 	if (argc == 2) {
+ 		showall = (strcmp(argv[1], "showall") == 0);
+ 		helpall = (strcmp(argv[1], "helpall") == 0);

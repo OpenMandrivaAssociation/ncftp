@@ -1,0 +1,11 @@
+--- ncftp/pref.c	2006-08-02 01:34:16.000000000 +0200
++++ ncftp/pref.c.oden	2008-12-22 11:53:15.000000000 +0100
+@@ -81,7 +81,7 @@ PrefOpt gPrefOpts[] = {
+ 	{ "auto-resume",			SetAutoResume, 1 },
+ 	{ "autosave-bookmark-changes",		SetAutoSaveChangesToExistingBookmarks, 1 },
+ 	{ "blank-lines",			PREFOBSELETE },
+-	{ "confirm-close",			SetConfirmClose, 1 },
++	{ "confirm-close",			SetConfirmClose, 0 },
+ 	{ "connect-timeout",			SetConnTimeout, 1 },
+ 	{ "control-timeout",			SetCtrlTimeout, 1 },
+ 	{ "logsize",				SetLogSize, 1 },
