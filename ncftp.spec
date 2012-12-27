@@ -1,3 +1,5 @@
+%bcond_without	uclibc
+
 Summary:	An improved FTP client
 Name:		ncftp
 Version:	3.2.5
@@ -5,6 +7,9 @@ Release:	2
 Group:		Networking/File transfer
 URL:		http://www.ncftp.com/
 BuildRequires:	pkgconfig(ncursesw)
+%if %{with uclibc}
+BuildRequires:	uClibc-devel
+%endif
 License:	Artistic
 Source0:	ftp://ftp.ncftp.com/ncftp/ncftp-%{version}-src.tar.bz2
 Patch0:		ncftp-confirm.patch
@@ -22,6 +27,15 @@ Ncftp is an improved FTP client.  Ncftp's improvements include support
 for command line editing, command histories, recursive gets, automatic
 anonymous logins and more.
 
+%package -n	uclibc-%{name}
+Summary:	An improved FTP client (uClibc build)
+Group:		Networking/File transfer
+
+%description -n uclibc-%{name}
+Ncftp is an improved FTP client.  Ncftp's improvements include support
+for command line editing, command histories, recursive gets, automatic
+anonymous logins and more.
+
 %prep
 %setup -q
 %patch0 -p0 -b .confirm~ 
@@ -31,12 +45,35 @@ anonymous logins and more.
 %patch8 -p1 -b .help~
 %patch9 -p1 -b .pmeter~
 
+%if %{with uclibc}
+mkdir .uclibc
+cp -a * .uclibc
+%endif
+
 %build
+%if %{with uclibc}
+pushd .uclibc
+# not using %%uclibc_configure macro as configure script doesn't handle
+# variables passed as arguments
+export CC="%{uclibc_cc}"
+export CFLAGS="%{uclibc_cflags}"
+%configure	--enable-signals \
+		--enable-ipv6 \
+		--bindir=%{uclibc_root}%{_bindir}
+%make STRIPFLAG="" STRIP="true"
+unset CC CFLAGS
+popd
+%endif
+
 %configure	--enable-signals \
 		--enable-ipv6
 %make STRIPFLAG="" STRIP="true"
 
 %install
+%if %{with uclibc}
+%makeinstall_std -C .uclibc STRIPFLAG="" STRIP="true"
+%endif
+
 %makeinstall_std STRIPFLAG="" STRIP="true"
 
 rm doc/*indows.txt
@@ -46,8 +83,14 @@ rm doc/*indows.txt
 %{_bindir}/*
 %{_mandir}/*/*
 
+%if %{with uclibc}
+%files -n uclibc-%{name}
+%{uclibc_root}%{_bindir}/*
+%endif
+
 %changelog
 * Thu Dec 27 2012 Per Øyvind Karlsen <peroyvind@mandriva.org> 3.2.5-2
+- do uclibc build
 - leave stripping of binaries to rpm so that we can get proper -debuginfo pkgs
 - don't enable progressbar when called from a script (P9, rhbz#78905)
 - cleanups
