@@ -4,7 +4,7 @@ Version:	3.2.5
 Release:	2
 Group:		Networking/File transfer
 URL:		http://www.ncftp.com/
-BuildRequires:	ncurses-devel
+BuildRequires:	pkgconfig(ncursesw)
 License:	Artistic
 Source0:	ftp://ftp.ncftp.com/ncftp/ncftp-%{version}-src.tar.bz2
 Patch0:		ncftp-confirm.patch
