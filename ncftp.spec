@@ -34,10 +34,10 @@ anonymous logins and more.
 %build
 %configure	--enable-signals \
 		--enable-ipv6
-%make
+%make STRIPFLAG="" STRIP="true"
 
 %install
-%makeinstall_std
+%makeinstall_std STRIPFLAG="" STRIP="true"
 
 rm doc/*indows.txt
 
@@ -48,6 +48,7 @@ rm doc/*indows.txt
 
 %changelog
 * Thu Dec 27 2012 Per Øyvind Karlsen <peroyvind@mandriva.org> 3.2.5-2
+- leave stripping of binaries to rpm so that we can get proper -debuginfo pkgs
 - don't enable progressbar when called from a script (P9, rhbz#78905)
 - cleanups
 
