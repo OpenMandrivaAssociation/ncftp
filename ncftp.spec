@@ -15,6 +15,7 @@ Patch5:		ncftp-3.1.9-suspend.patch
 # It will allow ncftp to work with publicfile. http://publicfile.org/
 Patch7:		ncftp-3.1.1-EPLF.diff
 Patch8:		ncftp-3.2.3-fix-help-cmd.patch
+Patch9:		ncftp-3.1.5-pmeter.patch
 
 %description
 Ncftp is an improved FTP client.  Ncftp's improvements include support
@@ -28,6 +29,7 @@ anonymous logins and more.
 %patch5 -p1 -b .suspend~
 %patch7 -p0 -b .eplf̈~
 %patch8 -p1 -b .help~
+%patch9 -p1 -b .pmeter~
 
 %build
 %configure	--enable-signals \
@@ -46,6 +48,7 @@ rm doc/*indows.txt
 
 %changelog
 * Thu Dec 27 2012 Per Øyvind Karlsen <peroyvind@mandriva.org> 3.2.5-2
+- don't enable progressbar when called from a script (P9, rhbz#78905)
 - cleanups
 
 * Tue May 17 2011 Funda Wang <fwang@mandriva.org> 3.2.5-1mdv2011.0
