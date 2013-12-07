@@ -3,7 +3,7 @@
 Summary:	An improved FTP client
 Name:		ncftp
 Version:	3.2.5
-Release:	4
+Release:	5
 Group:		Networking/File transfer
 License:	Artistic
 Url:		http://www.ncftp.com/
