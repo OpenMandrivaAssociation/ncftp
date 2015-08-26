@@ -1,9 +1,9 @@
-%bcond_without	uclibc
+%bcond_with	uclibc
 
 Summary:	An improved FTP client
 Name:		ncftp
 Version:	3.2.5
-Release:	10
+Release:	11
 Group:		Networking/File transfer
 License:	Artistic
 Url:		http://www.ncftp.com/
@@ -27,6 +27,7 @@ Ncftp is an improved FTP client.  Ncftp's improvements include support
 for command line editing, command histories, recursive gets, automatic
 anonymous logins and more.
 
+%if %{with uclibc}
 %package -n	uclibc-%{name}
 Summary:	An improved FTP client (uClibc build)
 Group:		Networking/File transfer
@@ -35,13 +36,14 @@ Group:		Networking/File transfer
 Ncftp is an improved FTP client.  Ncftp's improvements include support
 for command line editing, command histories, recursive gets, automatic
 anonymous logins and more.
+%endif
 
 %prep
 %setup -q
 %patch0 -p0 -b .confirm~ 
 %patch3 -p1 -b .resume~
 %patch5 -p1 -b .suspend~
-%patch7 -p0 -b .eplf̈~
+%patch7 -p0 -b .epl~
 %patch8 -p1 -b .help~
 %patch9 -p1 -b .pmeter~
 
