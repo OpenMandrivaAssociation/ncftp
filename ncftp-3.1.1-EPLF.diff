@@ -1,12 +1,9 @@
---- libncftp/io_listmem.c	2006-03-13 19:41:50.000000000 +0100
-+++ libncftp/io_listmem.c.oden	2008-12-22 11:55:31.000000000 +0100
-@@ -31,6 +31,52 @@
- #	endif
+--- ncftp-3.2.6/libncftp/io_listmem.c.epl~	2016-10-30 18:33:38.000000000 +0100
++++ ncftp-3.2.6/libncftp/io_listmem.c	2016-11-28 21:14:33.938835481 +0100
+@@ -14,6 +14,49 @@
+ #	define NO_SIGNALS 1
  #endif
  
-+
-+
-+
 +void parseEPLF(char *line) {
 +  char newline[512];
 +  char *name=0;
@@ -53,7 +50,7 @@
  int
  FTPListToMemory2(const FTPCIPtr cip, const char *const pattern, const FTPLineListPtr llines, const char *const lsflags, const int blankLines, int *const tryMLSD)
  {
-@@ -161,6 +207,10 @@ FTPListToMemory2(const FTPCIPtr cip, con
+@@ -214,6 +257,10 @@ FTPListToMemory2(const FTPCIPtr cip, con
  			if ((line[0] == '.') && ((islsenddelim(line[1])) || ((line[1] == '.') && (islsenddelim(line[2])))))
  				continue;	/* Skip . and .. */
  

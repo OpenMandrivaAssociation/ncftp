@@ -2,12 +2,12 @@
 
 Summary:	An improved FTP client
 Name:		ncftp
-Version:	3.2.5
-Release:	11
+Version:	3.2.6
+Release:	1
 Group:		Networking/File transfer
 License:	Artistic
 Url:		http://www.ncftp.com/
-Source0:	ftp://ftp.ncftp.com/ncftp/ncftp-%{version}-src.tar.bz2
+Source0:	ftp://ftp.ncftp.com/ncftp/ncftp-%{version}-src.tar.xz
 Patch0:		ncftp-confirm.patch
 Patch3:		ncftp-3.0.3-resume.patch
 Patch5:		ncftp-3.1.9-suspend.patch
@@ -43,7 +43,7 @@ anonymous logins and more.
 %patch0 -p0 -b .confirm~ 
 %patch3 -p1 -b .resume~
 %patch5 -p1 -b .suspend~
-%patch7 -p0 -b .epl~
+%patch7 -p1 -b .epl~
 %patch8 -p1 -b .help~
 %patch9 -p1 -b .pmeter~
 
