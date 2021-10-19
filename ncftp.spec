@@ -1,7 +1,10 @@
+# Workaround duplicate symbols
+%global optflags %{optflags} -fcommon
+
 Summary:	An improved FTP client
 Name:		ncftp
 Version:	3.2.6
-Release:	4
+Release:	5
 Group:		Networking/File transfer
 License:	Artistic
 Url:		http://www.ncftp.com/
