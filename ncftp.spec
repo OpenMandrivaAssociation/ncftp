@@ -7,7 +7,7 @@ Version:	3.2.6
 Release:	6
 Group:		Networking/File transfer
 License:	Artistic
-Url:		http://www.ncftp.com/
+Url:		https://www.ncftp.com/
 Source0:	ftp://ftp.ncftp.com/ncftp/ncftp-%{version}-src.tar.xz
 Patch0:		ncftp-confirm.patch
 Patch3:		ncftp-3.0.3-resume.patch
