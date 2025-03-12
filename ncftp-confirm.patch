@@ -1,5 +1,5 @@
---- ncftp/pref.c	2006-08-02 01:34:16.000000000 +0200
-+++ ncftp/pref.c.oden	2008-12-22 11:53:15.000000000 +0100
+--- a/ncftp/pref.c	2006-08-02 01:34:16.000000000 +0200
++++ b/ncftp/pref.c.oden	2008-12-22 11:53:15.000000000 +0100
 @@ -81,7 +81,7 @@ PrefOpt gPrefOpts[] = {
  	{ "auto-resume",			SetAutoResume, 1 },
  	{ "autosave-bookmark-changes",		SetAutoSaveChangesToExistingBookmarks, 1 },
