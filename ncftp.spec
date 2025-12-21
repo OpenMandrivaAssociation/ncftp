@@ -16,6 +16,11 @@ Patch5:		ncftp-3.1.9-suspend.patch
 # It will allow ncftp to work with publicfile. http://publicfile.org/
 Patch7:		ncftp-3.1.1-EPLF.diff
 Patch8:		ncftp-3.2.3-fix-help-cmd.patch
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	pkgconfig(ncursesw)
 
 %description
